@@ -47,13 +47,7 @@ class MCP23008
          * @param address Hardwired address (only the 3 LSB matching device external biasing)
          * @param i2c_channel Identifier for HAL, for when more than one I2C channel is used in parent project
         */
-        MCP23008(uint8_t address, uint8_t i2c_channel=0);
-
-        /**
-         * @brief Initialize MCP23008 device; device will not work correctly without initialization
-         * @param baudrate Baud rate to be applied to the HAL I2C bus init
-        */
-        void init(uint32_t baudrate=100000) const;
+        MCP23008(HAL::I2C& i2c_bus, uint8_t address);
 
         /**
          * @brief Set IO type on a given pin
@@ -110,7 +104,8 @@ class MCP23008
         uint8_t read(uint8_t reg) const;
  
 private:
-    HAL::I2C _i2c;
+    HAL::I2C& _i2c;
+    uint8_t   _i2c_addr;
 
     void i2cWrite(uint8_t reg, uint8_t byte) const;
     uint8_t i2cRead(uint8_t reg) const;

@@ -13,14 +13,10 @@
 namespace PeripheralIO 
 {
 
-MCP23008::MCP23008(uint8_t address, uint8_t i2c_channel)
-: _i2c((MCP23008_ADDR | (address & 0x07)), i2c_channel)
+MCP23008::MCP23008(HAL::I2C& i2c_bus, uint8_t address)
+: _i2c(i2c_bus)
+, _i2c_addr((MCP23008_ADDR | (address & 0x07)))
 { }
-
-void MCP23008::init(uint32_t baudrate) const
-{
-    _i2c.init(baudrate);
-}
 
 bool MCP23008::pinMode(uint8_t pin, uint8_t mode) const 
 {
@@ -117,7 +113,7 @@ uint8_t MCP23008::read(uint8_t reg) const
  */
 void MCP23008::i2cWrite(uint8_t reg, uint8_t byte) const 
 {
-    _i2c.write(reg, byte);
+    _i2c.write(_i2c_addr, reg, byte);
 }
 
 /**
@@ -127,7 +123,7 @@ uint8_t MCP23008::i2cRead(uint8_t reg) const
 {
     uint8_t data = 0;
 
-    _i2c.writeRead(reg, &data);
+    _i2c.writeRead(_i2c_addr, reg, &data);
 
     return data;
 }
