@@ -23,8 +23,8 @@ This IO-expander driver's `pinMode()` and `portMode()` methods require HAL defin
 HAL::I2C i2c_bus;
 
 // Instantiate IO-expander
-static const uint8_t          MCP23X08_ADDRESS = 0x20;
-static PeripheralIO::MCP23008 i2c_io(i2c_bus, MCP23X08_ADDRESS);
+static const uint8_t   MCP23X08_ADDRESS = 0x20;
+PeripheralIO::MCP23008 i2c_io(i2c_bus, MCP23X08_ADDRESS);
 
 ...
 
@@ -33,6 +33,9 @@ int main()
     uint8_t read_data;
 
 ...
+    // Init I2C bus
+	i2c_bus.init();
+
     // Init IO-expander
     i2c_io.init();
     i2c_io.portMode(GPIO_INPUT);
