@@ -1,0 +1,18 @@
+{
+    "name": "mcp23008",
+    "version": "1.0.0",
+    "description": "Generic, portable, multi-instance I2C IO-expander driver",
+    "keywords": "embedded, driver, hal, gpio, expander, io, i2c, mcp23008",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/johnmgreenwell/mcp23008"
+    },
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*",
+    "build": {
+        "flags": [
+        "-I../../include"
+        ]
+    }
+}
