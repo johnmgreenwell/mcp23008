@@ -15,7 +15,7 @@ This IO-expander driver's `pinMode()` and `portMode()` methods require HAL defin
 ### Example
 
 ```cpp
-#include <mcp23008.h>
+#include "mcp23008.h"
 
 ...
 
