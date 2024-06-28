@@ -4,7 +4,7 @@ Portable, multi-instance I2C IO-expander driver.
 
 ## Overview
 
-This HAL-mediated custom [MCP23008](https://www.digikey.com/en/products/detail/microchip-technology/MCP23008T-E-SO/739286) IO-expander driver permits ease of use that is portable across many platforms.
+This HAL-mediated custom [MCP23008](https://www.digikey.com/en/products/detail/microchip-technology/MCP23008T-E-SO/739286) IO-expander driver permits ease of use that is designed to be platform-independent.
 
 ## Usage
 
