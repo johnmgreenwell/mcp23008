@@ -61,7 +61,7 @@ class MCP23008
          * @brief Set IO type on entire 8 pins of MCP23008
          * @param mode Pin mode; (GPIO_OUTPUT, GPIO_INPUT, GPIO_INPUT_PULLUP)
         */
-        void portMode(uint8_t mode) const;
+        bool portMode(uint8_t mode) const;
 
         /**
          * @brief Write value to individual pin 0-7. Pin must already be configured as output
@@ -82,14 +82,14 @@ class MCP23008
          * @brief Direct write value to entire GPIO port; port must be already configured as output
          * @param val Value to write to GPIO port
         */
-        void write(uint8_t val) const;
+        bool write(uint8_t val) const;
 
         /**
          * @brief Direct write of value to specific MCP23008 internal register; e.g. write(MCP23008_OLAT, 0xFF)
          * @param reg Register number to which value is to be written; e.g. MCP23008_INTCON
          * @param val Value to write to register
         */
-        void write(uint8_t reg, uint8_t val) const;
+        bool write(uint8_t reg, uint8_t val) const;
 
         /**
          * @brief Direct read value from entire GPIO port; port must already be configured as input
@@ -107,8 +107,8 @@ private:
     HAL::I2C& _i2c;
     uint8_t   _i2c_addr;
 
-    void i2cWrite(uint8_t reg, uint8_t byte) const;
-    uint8_t i2cRead(uint8_t reg) const;
+    uint8_t i2cWrite(uint8_t reg, uint8_t byte) const;
+    uint8_t i2cRead(uint8_t reg, uint8_t * data) const;
 };
 
 }
