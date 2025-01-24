@@ -10,7 +10,7 @@ This HAL-mediated custom [MCP23008](https://www.digikey.com/en/products/detail/m
 
 The implementation relies on an external user-defined hardware abstraction layer (HAL) called `hal.h` which defines the necessary calls in the `HAL` namespace. Namely, a I2C bus object with `init()`, `write()`, and `writeRead()` methods.
 
-This IO-expander driver's `pinMode()` and `portMode()` methods require HAL definitions for values `GPIO_OUTPUT`, `GPIO_INPUT`, and `GPIO_INPUT_PULLUP`, which are used as enumerators. The `init()` method of the HAL I2C bus object should perform any necessary initialization. The `write()` should take three uint8_t values: an address, a register value, and a data value be output successively on the bus. The `writeRead()` method takes a uint8_t address, a uint8_t register value to be written and a uint8_t pointer to the buffer into which one byte of data is read.
+This IO-expander driver's `pinMode()` and `portMode()` methods require HAL definitions for values `GPIO_OUTPUT`, `GPIO_INPUT`, and `GPIO_INPUT_PULLUP`, which are used as enumerators. The `init()` method of the HAL I2C bus object should perform any necessary initialization. The `write()` should take three uint8_t values: an address, a register value, and a data value be output successively on the bus. The `writeRead()` method takes a uint8_t address, a uint8_t register value to be written and a uint8_t pointer to the buffer into which one byte of data is read. I2C methods should return zero for success and nonzero for error.
 
 ### Example
 
@@ -34,11 +34,10 @@ int main()
 
 ...
     // Init I2C bus
-	i2c_bus.init();
+    i2c_bus.init();
 
-    // Init IO-expander
-    i2c_io.init();
-    i2c_io.portMode(GPIO_INPUT);
+    // Init IO-expander, halt if i2c error
+    if (!i2c_io.portMode(GPIO_INPUT)) while(true);
 
 ...
     // Read IO-expander on condition
