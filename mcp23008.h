@@ -53,13 +53,14 @@ class MCP23008
          * @brief Set IO type on a given pin
          * @param pin Pin 0-7 on which mode is set
          * @param mode Pin mode (GPIO_OUTPUT, GPIO_INPUT, GPIO_INPUT_PULLUP)
-         * @return False on invalid arguments, true otherwise
+         * @return False on invalid arguments or comm failure, true otherwise
         */
         bool pinMode(uint8_t pin, uint8_t mode) const;
 
         /**
          * @brief Set IO type on entire 8 pins of MCP23008
          * @param mode Pin mode; (GPIO_OUTPUT, GPIO_INPUT, GPIO_INPUT_PULLUP)
+         * @return False on invalid arguments or comm failure, true otherwise
         */
         bool portMode(uint8_t mode) const;
 
@@ -67,7 +68,7 @@ class MCP23008
          * @brief Write value to individual pin 0-7. Pin must already be configured as output
          * @param pin Pin 0-7 on which value is set
          * @param val Value to be written; zero for logic low, non-zero for logic high
-         * @return False on invalid arguments, true otherwise
+         * @return False on invalid arguments or comm failure, true otherwise
         */
         bool digitalWrite(uint8_t pin, uint8_t val) const;
 
@@ -81,6 +82,7 @@ class MCP23008
         /**
          * @brief Direct write value to entire GPIO port; port must be already configured as output
          * @param val Value to write to GPIO port
+         * @return False on invalid arguments or comm failure, true otherwise
         */
         bool write(uint8_t val) const;
 
@@ -88,6 +90,7 @@ class MCP23008
          * @brief Direct write of value to specific MCP23008 internal register; e.g. write(MCP23008_OLAT, 0xFF)
          * @param reg Register number to which value is to be written; e.g. MCP23008_INTCON
          * @param val Value to write to register
+         * @return False on invalid arguments or comm failure, true otherwise
         */
         bool write(uint8_t reg, uint8_t val) const;
 
@@ -99,7 +102,8 @@ class MCP23008
 
         /**
          * @brief Direct read of value from specific register; e.g. read(MCP23008_OLAT)
-         * @param reg Register number to which value is to be written; e.g. MCP23008_INTCON
+         * @param reg Register number from which value is to be read; e.g. MCP23008_INTCON
+         * @return Value read from register
         */
         uint8_t read(uint8_t reg) const;
  
