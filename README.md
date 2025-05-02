@@ -12,6 +12,8 @@ The implementation relies on an external user-defined hardware abstraction layer
 
 This IO-expander driver's `pinMode()` and `portMode()` methods require HAL definitions for values `GPIO_OUTPUT`, `GPIO_INPUT`, and `GPIO_INPUT_PULLUP`, which are used as enumerators. The `init()` method of the HAL I2C bus object should perform any necessary initialization. The `write()` should take three uint8_t values: an address, a register value, and a data value be output successively on the bus. The `writeRead()` method takes a uint8_t address, a uint8_t register value to be written and a uint8_t pointer to the buffer into which one byte of data is read. I2C methods should return zero for success and nonzero for error.
 
+Most methods of this driver will return true for success, or false for I2C bus error or malformed parameters.
+
 ### Example
 
 ```cpp
